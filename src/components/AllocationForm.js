@@ -8,6 +8,13 @@ const AllocationForm = (props) => {
   const [cost, setCost] = useState("");
   const [action, setAction] = useState("");
 
+  const [selectedOption, setSelectedOption] = useState("Option 1");
+
+  // Function to handle changes in the dropdown
+  const handleDropdownChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
   const submitEvent = () => {
     if (cost > remaining) {
       alert("The value cannot exceed remaining funds  £" + remaining);
@@ -89,7 +96,9 @@ const AllocationForm = (props) => {
               Reduce
             </option>
           </select>
-
+          <label htmlFor="cost" className="pounds">
+            £
+          </label>
           <input
             required="required"
             type="number"
@@ -107,6 +116,19 @@ const AllocationForm = (props) => {
             Save
           </button>
         </div>
+      </div>
+      <div id="currencyFold">
+        <label htmlFor="currencyDropdown">Currency</label>
+        <select
+          id="currencyDropdown"
+          value={selectedOption}
+          onChange={handleDropdownChange}
+        >
+          <option value="Dollar">($ Dollar)</option>
+          <option value="Pound">(£ Pound)</option>
+          <option value="Euro">(€ Euro)</option>
+          <option value="Ruppee">(₹ Ruppee)</option>
+        </select>
       </div>
     </div>
   );
