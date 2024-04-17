@@ -2,17 +2,19 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const AllocationForm = (props) => {
-  const { dispatch, remaining } = useContext(AppContext);
+  const { dispatch, remaining, currency } = useContext(AppContext);
 
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
   const [action, setAction] = useState("");
 
-  const [selectedOption, setSelectedOption] = useState("Option 1");
+  const [selectedOption, setSelectedOption] = useState("Pound");
 
   // Function to handle changes in the dropdown
   const handleDropdownChange = (event) => {
-    setSelectedOption(event.target.value);
+    const selectedCurrency = event.target.value;
+    setSelectedOption(selectedCurrency);
+    dispatch({ type: "CHG_CURRENCY", payload: selectedCurrency });
   };
 
   const submitEvent = () => {
@@ -96,17 +98,19 @@ const AllocationForm = (props) => {
               Reduce
             </option>
           </select>
-          <label htmlFor="cost" className="pounds">
-            £
-          </label>
-          <input
-            required="required"
-            type="number"
-            id="cost"
-            value={cost}
-            style={{ marginLeft: "2rem", size: 10 }}
-            onChange={checkValueType}
-          ></input>
+          <div style={{ position: "relative" }}>
+            <label htmlFor="cost" className="pounds">
+              {currency}
+            </label>
+            <input
+              required="required"
+              type="number"
+              id="cost"
+              value={cost}
+              style={{ marginLeft: "2rem", size: 10 }}
+              onChange={checkValueType}
+            ></input>
+          </div>
 
           <button
             className="btn btn-primary"
@@ -124,10 +128,10 @@ const AllocationForm = (props) => {
           value={selectedOption}
           onChange={handleDropdownChange}
         >
-          <option value="Dollar">($ Dollar)</option>
-          <option value="Pound">(£ Pound)</option>
-          <option value="Euro">(€ Euro)</option>
-          <option value="Ruppee">(₹ Ruppee)</option>
+          <option value="$">($ Dollar)</option>
+          <option value="£">(£ Pound)</option>
+          <option value="€">(€ Euro)</option>
+          <option value="₹">(₹ Ruppee)</option>
         </select>
       </div>
     </div>

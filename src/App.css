@@ -3,8 +3,8 @@
 }
 
 .pounds {
-  border: 1px dashed red;
-  margin-left: auto;
+  position: absolute;
+  left: 20px;
 }
 
 .budget {
@@ -18,7 +18,8 @@
   align-items: center;
 }
 
-.increase-btn {
+.increase-btn,
+.decrease-btn {
   border: none;
   border-radius: 50%;
   height: 20px;
@@ -32,6 +33,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.decrease-btn {
+  background-color: rgb(182, 11, 11);
 }
 
 #currencyFold {
@@ -50,6 +55,10 @@
   outline: none;
   background-color: rgb(105, 221, 105);
   color: white;
+}
+
+#currencyDropdown option:focus {
+  border: 1px dashed red;
 }
 
 #currencyDropdown option {
